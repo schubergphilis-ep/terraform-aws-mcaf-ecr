@@ -82,7 +82,7 @@ resource "aws_ecr_lifecycle_policy" "default" {
 
 
 data "aws_iam_policy_document" "default" {
-  count = local.ecr_policies != null ? 1 : 0
+  count = length(local.ecr_policies) != 0 ? 1 : 0
 
   dynamic "statement" {
     for_each = local.ecr_policies
