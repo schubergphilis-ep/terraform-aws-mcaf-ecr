@@ -82,7 +82,7 @@ resource "aws_ecr_lifecycle_policy" "default" {
 
 
 data "aws_iam_policy_document" "default" {
-  count = length(local.ecr_policies) != 0 ? 1 : 0
+  count = length(local.ecr_policies) > 0 ? 1 : 0
 
   dynamic "statement" {
     for_each = local.ecr_policies
@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "default" {
 }
 
 resource "aws_ecr_repository_policy" "default" {
-  for_each = toset(local.ecr_policies != null ? var.repository_names : [])
+  for_each = toset(length(local.ecr_policies) > 0 ? var.repository_names : [])
 
   repository = aws_ecr_repository.default[each.value].id
   policy     = join("", data.aws_iam_policy_document.default[*].json)
