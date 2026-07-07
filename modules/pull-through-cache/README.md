@@ -46,7 +46,7 @@ For the pull through cache rules configuration, a sample of the most common regi
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr_repo_creation_template_role"></a> [ecr\_repo\_creation\_template\_role](#module\_ecr\_repo\_creation\_template\_role) | schubergphilis/mcaf-role/aws | ~> 0.5.3 |
+| <a name="module_ecr_repo_creation_template_role"></a> [ecr\_repo\_creation\_template\_role](#module\_ecr\_repo\_creation\_template\_role) | schubergphilis-ep/mcaf-role/aws | ~> 0.5.3 |
 
 ## Resources
 
