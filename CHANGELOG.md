@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.2](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.4.1...v1.4.2) (2026-07-07)
+
+
+### 🐛 Fixes
+
+* migrate MCAF module sources ([#2](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/2)) ([da1c26b](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/da1c26b204e610e77e17a1c08a825e82b17c3323))
+
 ## [1.4.1](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.4.0...v1.4.1) (2026-06-30)
 
 
@@ -80,4 +87,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.0.0...v1.0.1) (2021-04-12)
 
 ## 1.0.0 (2020-11-18)
-
