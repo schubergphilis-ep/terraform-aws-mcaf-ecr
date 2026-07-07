@@ -15,7 +15,7 @@ resource "aws_ecr_registry_policy" "default" {
 module "ecr_repo_creation_template_role" {
   count = var.create && var.create_ecr_repository_creation_role ? 1 : 0
 
-  source  = "schubergphilis/mcaf-role/aws"
+  source  = "schubergphilis-ep/mcaf-role/aws"
   version = "~> 0.5.3"
 
   name                  = "EcrRepositoryCreationTemplate"
