@@ -22,6 +22,40 @@ variable "custom_ecr_repository_creation_role_arn" {
   description = "Custom role ARN for the creation template"
 }
 
+variable "image_tag_mutability" {
+  type        = string
+  default     = "IMMUTABLE" # AWS recommends MUTABLE for pull through cache: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html
+  description = "The tag mutability setting for repositories created by the template. Must be: `MUTABLE`, `IMMUTABLE` or `IMMUTABLE_WITH_EXCLUSION`"
+
+  validation {
+    condition = (
+      var.image_tag_mutability_exclusion_filter == null
+      || length(var.image_tag_mutability_exclusion_filter) == 0
+      || upper(var.image_tag_mutability) == "IMMUTABLE_WITH_EXCLUSION"
+    )
+    error_message = "If image_tag_mutability_exclusion_filter is set (non-null and non-empty), image_tag_mutability must be `IMMUTABLE_WITH_EXCLUSION`."
+  }
+}
+
+variable "image_tag_mutability_exclusion_filter" {
+  type = list(object({
+    filter      = string
+    filter_type = string
+  }))
+  default     = null
+  description = "List of image tag exclusion filters for repositories created by the template"
+
+  validation {
+    condition = (
+      var.image_tag_mutability_exclusion_filter == null
+      || alltrue([
+        for f in var.image_tag_mutability_exclusion_filter : upper(f.filter_type) == "WILDCARD"
+      ])
+    )
+    error_message = "Every image_tag_mutability_exclusion_filter.filter_type must be 'WILDCARD' (case-insensitive)."
+  }
+}
+
 variable "kms_key_arn" {
   type        = string
   default     = null

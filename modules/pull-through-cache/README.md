@@ -4,6 +4,8 @@ This module creates cache rules, registry policy and repository creation templat
 
 Sample creation of a github pull through cache is under examples/pull-through-cache.
 
+Image tag mutability defaults to `IMMUTABLE`. AWS [recommends `MUTABLE`](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html) for pull through cache repositories: with `IMMUTABLE`, ECR cannot update a cached image when the upstream tag moves. To keep only some tags mutable (e.g. `latest`), use `IMMUTABLE_WITH_EXCLUSION` with `image_tag_mutability_exclusion_filter`. The template only applies at repository creation, so existing cached repositories keep their current setting.
+
 For the pull through cache rules configuration, a sample of the most common registries can be found below:
 
 ```hcl
