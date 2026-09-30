@@ -28,6 +28,8 @@ For the pull through cache rules configuration, a sample of the most common regi
 
 ```
 
+IAM role names are unique within an AWS account. When calling this module more than once in the same account (e.g. per region or per upstream registry), set a distinct `repository_creation_role_name` for each call.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
