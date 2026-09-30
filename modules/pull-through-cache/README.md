@@ -36,13 +36,13 @@ For the pull through cache rules configuration, a sample of the most common regi
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.8.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.10.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.8.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.10.0 |
 
 ## Modules
 
@@ -72,6 +72,8 @@ For the pull through cache rules configuration, a sample of the most common regi
 | <a name="input_create_ecr_repository_creation_role"></a> [create\_ecr\_repository\_creation\_role](#input\_create\_ecr\_repository\_creation\_role) | Create the IAM role used as a template for ECR repository creation. | `bool` | `true` | no |
 | <a name="input_create_registry_policy"></a> [create\_registry\_policy](#input\_create\_registry\_policy) | Determines whether a registry policy will be created | `bool` | `false` | no |
 | <a name="input_custom_ecr_repository_creation_role_arn"></a> [custom\_ecr\_repository\_creation\_role\_arn](#input\_custom\_ecr\_repository\_creation\_role\_arn) | Custom role ARN for the creation template | `string` | `null` | no |
+| <a name="input_image_tag_mutability"></a> [image\_tag\_mutability](#input\_image\_tag\_mutability) | The tag mutability setting for repositories created by the template. Must be: `MUTABLE`, `IMMUTABLE` or `IMMUTABLE_WITH_EXCLUSION` | `string` | `"IMMUTABLE"` | no |
+| <a name="input_image_tag_mutability_exclusion_filter"></a> [image\_tag\_mutability\_exclusion\_filter](#input\_image\_tag\_mutability\_exclusion\_filter) | List of image tag exclusion filters for repositories created by the template | <pre>list(object({<br/>    filter      = string<br/>    filter_type = string<br/>  }))</pre> | `null` | no |
 | <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The KMS key used for encryption | `string` | `null` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | Name of Permissions Boundary, including path. (e.g. /ep/workload\_boundary) | `string` | `null` | no |
 | <a name="input_readonly_principals"></a> [readonly\_principals](#input\_readonly\_principals) | List of AWS account IDs. Account IDs (12 digits) will be converted to `arn:aws:iam::<account-id>:root`. | `list(string)` | `[]` | no |
