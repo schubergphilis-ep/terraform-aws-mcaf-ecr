@@ -60,14 +60,8 @@ run "immutable_with_mutable_latest" {
   }
 
   variables {
-    image_tag_mutability = "IMMUTABLE_WITH_EXCLUSION"
-
-    image_tag_mutability_exclusion_filter = [
-      {
-        filter      = "latest"
-        filter_type = "WILDCARD"
-      },
-    ]
+    image_tag_mutability                  = "IMMUTABLE_WITH_EXCLUSION"
+    image_tag_mutability_exclusion_filter = ["latest"]
   }
 
   assert {
@@ -79,9 +73,14 @@ run "immutable_with_mutable_latest" {
     condition     = aws_ecr_repository_creation_template.default["ecrpub"].image_tag_mutability_exclusion_filter[0].filter == "latest"
     error_message = "Expected an exclusion filter for latest."
   }
+
+  assert {
+    condition     = aws_ecr_repository_creation_template.default["ecrpub"].image_tag_mutability_exclusion_filter[0].filter_type == "WILDCARD"
+    error_message = "Expected the exclusion filter type to be WILDCARD."
+  }
 }
 
-run "exclusion_filter_requires_immutable_with_exclusion" {
+run "mutable_with_immutable_versions" {
   command = plan
 
   module {
@@ -89,14 +88,31 @@ run "exclusion_filter_requires_immutable_with_exclusion" {
   }
 
   variables {
-    image_tag_mutability = "MUTABLE"
+    image_tag_mutability                  = "MUTABLE_WITH_EXCLUSION"
+    image_tag_mutability_exclusion_filter = ["v*"]
+  }
 
-    image_tag_mutability_exclusion_filter = [
-      {
-        filter      = "latest"
-        filter_type = "WILDCARD"
-      },
-    ]
+  assert {
+    condition     = aws_ecr_repository_creation_template.default["ecrpub"].image_tag_mutability == "MUTABLE_WITH_EXCLUSION"
+    error_message = "Expected image_tag_mutability to be MUTABLE_WITH_EXCLUSION."
+  }
+
+  assert {
+    condition     = aws_ecr_repository_creation_template.default["ecrpub"].image_tag_mutability_exclusion_filter[0].filter == "v*"
+    error_message = "Expected an exclusion filter for v*."
+  }
+}
+
+run "exclusion_filter_requires_with_exclusion" {
+  command = plan
+
+  module {
+    source = "./modules/pull-through-cache"
+  }
+
+  variables {
+    image_tag_mutability                  = "MUTABLE"
+    image_tag_mutability_exclusion_filter = ["latest"]
   }
 
   expect_failures = [
@@ -104,7 +120,7 @@ run "exclusion_filter_requires_immutable_with_exclusion" {
   ]
 }
 
-run "exclusion_filter_type_must_be_wildcard" {
+run "exclusion_filter_null" {
   command = plan
 
   module {
@@ -112,17 +128,11 @@ run "exclusion_filter_type_must_be_wildcard" {
   }
 
   variables {
-    image_tag_mutability = "IMMUTABLE_WITH_EXCLUSION"
-
-    image_tag_mutability_exclusion_filter = [
-      {
-        filter      = "latest"
-        filter_type = "REGEX"
-      },
-    ]
+    image_tag_mutability_exclusion_filter = null
   }
 
-  expect_failures = [
-    var.image_tag_mutability_exclusion_filter,
-  ]
+  assert {
+    condition     = length(aws_ecr_repository_creation_template.default["ecrpub"].image_tag_mutability_exclusion_filter) == 0
+    error_message = "Expected a null image_tag_mutability_exclusion_filter to create no filters."
+  }
 }
