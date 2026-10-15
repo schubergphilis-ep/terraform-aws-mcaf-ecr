@@ -71,6 +71,12 @@ variable "readonly_principals" {
   description = "List of AWS account IDs. Account IDs (12 digits) will be converted to `arn:aws:iam::<account-id>:root`."
 }
 
+variable "repository_creation_role_name" {
+  type        = string
+  default     = "EcrRepositoryCreationTemplate"
+  description = "Name of the IAM role used by the repository creation template. Must be unique within the AWS account"
+}
+
 variable "resource_tags" {
   type        = map(string)
   default     = {}
