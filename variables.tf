@@ -37,35 +37,22 @@ variable "force_delete" {
 variable "image_tag_mutability" {
   type        = string
   default     = "IMMUTABLE"
-  description = "The tag mutability setting for the repository. Must be: `MUTABLE`, `IMMUTABLE` or `IMMUTABLE_WITH_EXCLUSION`"
+  description = "The tag mutability setting for the repository. Must be: `MUTABLE`, `IMMUTABLE`, `IMMUTABLE_WITH_EXCLUSION` or `MUTABLE_WITH_EXCLUSION`"
 
   validation {
     condition = (
-      var.image_tag_mutability_exclusion_filter == null
-      || length(var.image_tag_mutability_exclusion_filter) == 0
-      || upper(var.image_tag_mutability) == "IMMUTABLE_WITH_EXCLUSION"
+      length(var.image_tag_mutability_exclusion_filter) == 0
+      || contains(["IMMUTABLE_WITH_EXCLUSION", "MUTABLE_WITH_EXCLUSION"], var.image_tag_mutability)
     )
-    error_message = "If image_tag_mutability_exclusion_filter is set (non-null and non-empty), image_tag_mutability must be `IMMUTABLE_WITH_EXCLUSION`."
+    error_message = "If image_tag_mutability_exclusion_filter is set, image_tag_mutability must be `IMMUTABLE_WITH_EXCLUSION` or `MUTABLE_WITH_EXCLUSION`."
   }
 }
 
 variable "image_tag_mutability_exclusion_filter" {
-  type = list(object({
-    filter      = string
-    filter_type = string
-  }))
-  default     = null
-  description = "Map of image tag exclusion filters"
-
-  validation {
-    condition = (
-      var.image_tag_mutability_exclusion_filter == null
-      || alltrue([
-        for f in var.image_tag_mutability_exclusion_filter : upper(f.filter_type) == "WILDCARD"
-      ])
-    )
-    error_message = "Every image_tag_mutability_exclusion_filter.filter_type must be 'WILDCARD' (case-insensitive)."
-  }
+  type        = list(string)
+  default     = []
+  nullable    = false
+  description = "List of image tag filters excluded from the `image_tag_mutability` setting. Wildcards (`*`) are supported, e.g. `latest` or `v*`"
 }
 
 variable "kms_key_arn" {
