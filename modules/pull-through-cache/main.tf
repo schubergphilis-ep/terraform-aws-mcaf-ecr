@@ -18,7 +18,7 @@ module "ecr_repo_creation_template_role" {
   source  = "schubergphilis-ep/mcaf-role/aws"
   version = "~> 0.5.3"
 
-  name                  = "EcrRepositoryCreationTemplate"
+  name                  = var.repository_creation_role_name
   create_policy         = true
   permissions_boundary  = var.permissions_boundary != null ? "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy${var.permissions_boundary}" : null
   postfix               = false
@@ -47,7 +47,7 @@ resource "aws_ecr_repository_creation_template" "default" {
 
   dynamic "image_tag_mutability_exclusion_filter" {
     for_each = var.image_tag_mutability_exclusion_filter
-    
+
     content {
       filter      = image_tag_mutability_exclusion_filter.value
       filter_type = "WILDCARD"
