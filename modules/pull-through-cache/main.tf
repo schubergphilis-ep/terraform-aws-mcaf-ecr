@@ -47,6 +47,7 @@ resource "aws_ecr_repository_creation_template" "default" {
 
   dynamic "image_tag_mutability_exclusion_filter" {
     for_each = var.image_tag_mutability_exclusion_filter
+    
     content {
       filter      = image_tag_mutability_exclusion_filter.value
       filter_type = "WILDCARD"
