@@ -22,6 +22,27 @@ variable "custom_ecr_repository_creation_role_arn" {
   description = "Custom role ARN for the creation template"
 }
 
+variable "image_tag_mutability" {
+  type        = string
+  default     = "IMMUTABLE" # AWS recommends MUTABLE for pull through cache: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html
+  description = "The tag mutability setting for repositories created by the template. Must be: `MUTABLE`, `IMMUTABLE`, `IMMUTABLE_WITH_EXCLUSION` or `MUTABLE_WITH_EXCLUSION`"
+
+  validation {
+    condition = (
+      length(var.image_tag_mutability_exclusion_filter) == 0
+      || contains(["IMMUTABLE_WITH_EXCLUSION", "MUTABLE_WITH_EXCLUSION"], var.image_tag_mutability)
+    )
+    error_message = "If image_tag_mutability_exclusion_filter is set, image_tag_mutability must be `IMMUTABLE_WITH_EXCLUSION` or `MUTABLE_WITH_EXCLUSION`."
+  }
+}
+
+variable "image_tag_mutability_exclusion_filter" {
+  type        = list(string)
+  default     = []
+  nullable    = false
+  description = "List of image tag filters excluded from the `image_tag_mutability` setting for repositories created by the template. Wildcards (`*`) are supported, e.g. `latest` or `v*`"
+}
+
 variable "kms_key_arn" {
   type        = string
   default     = null

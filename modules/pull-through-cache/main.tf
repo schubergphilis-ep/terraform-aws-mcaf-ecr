@@ -31,7 +31,7 @@ resource "aws_ecr_repository_creation_template" "default" {
   for_each = { for k, v in var.pull_through_cache_rules : k => v if var.create }
 
   custom_role_arn      = try(module.ecr_repo_creation_template_role[0].arn, var.custom_ecr_repository_creation_role_arn)
-  image_tag_mutability = "IMMUTABLE"
+  image_tag_mutability = var.image_tag_mutability
   prefix               = each.value.ecr_repository_prefix
   repository_policy    = data.aws_iam_policy_document.creation_template.json
   resource_tags        = var.resource_tags
@@ -43,5 +43,14 @@ resource "aws_ecr_repository_creation_template" "default" {
   encryption_configuration {
     encryption_type = var.kms_key_arn != null ? "KMS" : "AES256"
     kms_key         = var.kms_key_arn
+  }
+
+  dynamic "image_tag_mutability_exclusion_filter" {
+    for_each = var.image_tag_mutability_exclusion_filter
+    
+    content {
+      filter      = image_tag_mutability_exclusion_filter.value
+      filter_type = "WILDCARD"
+    }
   }
 }
