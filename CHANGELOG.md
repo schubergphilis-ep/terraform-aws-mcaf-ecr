@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.4.2...v2.0.0) (2026-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* image_tag_mutability_exclusion_filter takes a list of tag filters; the filter type is always WILDCARD. MUTABLE_WITH_EXCLUSION is now allowed.
+
+### 🚀 Features
+
+* configurable pull-through cache role name ([#5](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/5)) ([d2d1dbf](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/d2d1dbf832731e895c613389682c27ee1eb96b64))
+* configurable pull-through cache tag mutability ([#4](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/4)) ([6343ced](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/6343cedb59a133e85b198bb5c6c10ecec255a57f))
+* exclusion filters as a list of strings ([#7](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/7)) ([e736abc](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/e736abc40a4308563b8cc5954a40f72cddac5dbe))
+
 ## [1.4.2](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.4.1...v1.4.2) (2026-07-07)
 
 
