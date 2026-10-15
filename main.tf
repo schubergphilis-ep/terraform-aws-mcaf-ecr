@@ -58,10 +58,11 @@ resource "aws_ecr_repository" "default" {
   }
 
   dynamic "image_tag_mutability_exclusion_filter" {
-    for_each = var.image_tag_mutability_exclusion_filter != null && length(var.image_tag_mutability_exclusion_filter) > 0 ? var.image_tag_mutability_exclusion_filter : []
+    for_each = var.image_tag_mutability_exclusion_filter
+
     content {
-      filter      = image_tag_mutability_exclusion_filter.value.filter
-      filter_type = image_tag_mutability_exclusion_filter.value.filter_type
+      filter      = image_tag_mutability_exclusion_filter.value
+      filter_type = "WILDCARD"
     }
   }
 }
