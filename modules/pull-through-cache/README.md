@@ -50,7 +50,7 @@ IAM role names are unique within an AWS account. When calling this module more t
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr_repo_creation_template_role"></a> [ecr\_repo\_creation\_template\_role](#module\_ecr\_repo\_creation\_template\_role) | schubergphilis-ep/mcaf-role/aws | ~> 0.5.3 |
+| <a name="module_ecr_repo_creation_template_role"></a> [ecr\_repo\_creation\_template\_role](#module\_ecr\_repo\_creation\_template\_role) | schubergphilis-ep/mcaf-role/aws | ~> 0.6.0 |
 
 ## Resources
 

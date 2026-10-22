@@ -16,7 +16,7 @@ module "ecr_repo_creation_template_role" {
   count = var.create && var.create_ecr_repository_creation_role ? 1 : 0
 
   source  = "schubergphilis-ep/mcaf-role/aws"
-  version = "~> 0.5.3"
+  version = "~> 0.6.0"
 
   name                  = var.repository_creation_role_name
   create_policy         = true
