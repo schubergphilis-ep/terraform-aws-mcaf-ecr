@@ -1,6 +1,8 @@
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
+data "aws_region" "current" {
+  region = var.region
+}
 
 # ECR Pull through cache - cross account
 data "aws_iam_policy_document" "registry" {

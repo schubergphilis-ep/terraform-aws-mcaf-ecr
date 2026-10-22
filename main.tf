@@ -44,6 +44,7 @@ resource "aws_ecr_repository" "default" {
   for_each = toset(var.repository_names)
 
   name                 = each.value
+  region               = var.region
   force_delete         = var.force_delete
   image_tag_mutability = var.image_tag_mutability
   tags                 = merge(var.tags, try(var.repository_tags[each.value], {}))
@@ -77,6 +78,7 @@ resource "aws_ecr_lifecycle_policy" "default" {
   for_each = toset(var.enable_lifecycle_policy ? var.repository_names : [])
 
   repository = aws_ecr_repository.default[each.value].id
+  region     = var.region
 
   policy = local.ecr_policy_to_apply
 }
@@ -115,5 +117,6 @@ resource "aws_ecr_repository_policy" "default" {
   for_each = toset(length(local.ecr_policies) > 0 ? var.repository_names : [])
 
   repository = aws_ecr_repository.default[each.value].id
+  region     = var.region
   policy     = join("", data.aws_iam_policy_document.default[*].json)
 }

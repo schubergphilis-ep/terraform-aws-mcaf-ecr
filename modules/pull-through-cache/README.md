@@ -79,6 +79,7 @@ IAM role names are unique within an AWS account. When calling this module more t
 | <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The KMS key used for encryption | `string` | `null` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | Name of Permissions Boundary, including path. (e.g. /ep/workload\_boundary) | `string` | `null` | no |
 | <a name="input_readonly_principals"></a> [readonly\_principals](#input\_readonly\_principals) | List of AWS account IDs. Account IDs (12 digits) will be converted to `arn:aws:iam::<account-id>:root`. | `list(string)` | `[]` | no |
+| <a name="input_region"></a> [region](#input\_region) | The AWS region where resources will be created; if omitted the default provider region is used | `string` | `null` | no |
 | <a name="input_repository_creation_role_name"></a> [repository\_creation\_role\_name](#input\_repository\_creation\_role\_name) | Name of the IAM role used by the repository creation template. Must be unique within the AWS account | `string` | `"EcrRepositoryCreationTemplate"` | no |
 | <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | The resource tags | `map(string)` | `{}` | no |
 

@@ -44,6 +44,7 @@ No modules.
 | <a name="input_image_tag_mutability_exclusion_filter"></a> [image\_tag\_mutability\_exclusion\_filter](#input\_image\_tag\_mutability\_exclusion\_filter) | List of image tag filters excluded from the `image_tag_mutability` setting. Wildcards (`*`) are supported, e.g. `latest` or `v*` | `list(string)` | `[]` | no |
 | <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The KMS key ARN used for the repository encryption | `string` | `null` | no |
 | <a name="input_principals_readonly_access"></a> [principals\_readonly\_access](#input\_principals\_readonly\_access) | Principal ARNs to provide with readonly access to the ECR | `list(string)` | `[]` | no |
+| <a name="input_region"></a> [region](#input\_region) | The AWS region where resources will be created; if omitted the default provider region is used | `string` | `null` | no |
 | <a name="input_repository_tags"></a> [repository\_tags](#input\_repository\_tags) | Mapping of tags for a repository using repository name as key | `map(map(string))` | `{}` | no |
 | <a name="input_scan_images_on_push"></a> [scan\_images\_on\_push](#input\_scan\_images\_on\_push) | Indicates if images are automatically scanned after being pushed to the repository | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Mapping of tags | `map(string)` | `{}` | no |
