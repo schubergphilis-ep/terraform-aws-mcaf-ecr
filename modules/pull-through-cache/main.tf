@@ -1,6 +1,7 @@
 resource "aws_ecr_pull_through_cache_rule" "default" {
   for_each = { for k, v in var.pull_through_cache_rules : k => v if var.create }
 
+  region                = var.region
   credential_arn        = try(each.value.credential_arn, null)
   ecr_repository_prefix = each.value.ecr_repository_prefix
   upstream_registry_url = each.value.upstream_registry_url
@@ -9,6 +10,7 @@ resource "aws_ecr_pull_through_cache_rule" "default" {
 resource "aws_ecr_registry_policy" "default" {
   count = var.create && var.create_registry_policy ? 1 : 0
 
+  region = var.region
   policy = data.aws_iam_policy_document.registry.json
 }
 
@@ -30,6 +32,7 @@ module "ecr_repo_creation_template_role" {
 resource "aws_ecr_repository_creation_template" "default" {
   for_each = { for k, v in var.pull_through_cache_rules : k => v if var.create }
 
+  region               = var.region
   custom_role_arn      = try(module.ecr_repo_creation_template_role[0].arn, var.custom_ecr_repository_creation_role_arn)
   image_tag_mutability = var.image_tag_mutability
   prefix               = each.value.ecr_repository_prefix

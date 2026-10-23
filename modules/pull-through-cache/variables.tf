@@ -71,6 +71,12 @@ variable "readonly_principals" {
   description = "List of AWS account IDs. Account IDs (12 digits) will be converted to `arn:aws:iam::<account-id>:root`."
 }
 
+variable "region" {
+  type        = string
+  default     = null
+  description = "The AWS region where resources will be created; if omitted the default provider region is used"
+}
+
 variable "repository_creation_role_name" {
   type        = string
   default     = "EcrRepositoryCreationTemplate"

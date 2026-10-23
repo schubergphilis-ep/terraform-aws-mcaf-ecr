@@ -67,6 +67,12 @@ variable "principals_readonly_access" {
   description = "Principal ARNs to provide with readonly access to the ECR"
 }
 
+variable "region" {
+  type        = string
+  default     = null
+  description = "The AWS region where resources will be created; if omitted the default provider region is used"
+}
+
 variable "repository_names" {
   type        = list(string)
   description = "list of repository names, names can include namespaces: prefixes ending with a slash (/)"
