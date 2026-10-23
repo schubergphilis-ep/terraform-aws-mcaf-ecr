@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v2.0.0...v2.1.0) (2026-10-23)
+
+
+### 🚀 Features
+
+* add region variable ([#9](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/9)) ([e16d4e1](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/e16d4e13261af879d8865abbae6944378e94ff86))
+
 ## [2.0.0](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v1.4.2...v2.0.0) (2026-10-15)
 
 
