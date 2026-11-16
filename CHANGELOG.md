@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.2.0](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v2.1.0...v2.2.0) (2026-11-16)
+
+
+### 🚀 Features
+
+* add repository_creation_role_description and use mcaf-role 0.6.0 ([#10](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/issues/10)) ([b41f7a6](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/commit/b41f7a6f83ffd02662cad809ae8c199343b40b41))
+
 ## [2.1.0](https://github.com/schubergphilis-ep/terraform-aws-mcaf-ecr/compare/v2.0.0...v2.1.0) (2026-10-23)
 
 
