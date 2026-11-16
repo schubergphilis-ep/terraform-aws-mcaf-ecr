@@ -18,9 +18,10 @@ module "ecr_repo_creation_template_role" {
   count = var.create && var.create_ecr_repository_creation_role ? 1 : 0
 
   source  = "schubergphilis-ep/mcaf-role/aws"
-  version = "~> 0.5.3"
+  version = "~> 0.6.0"
 
   name                  = var.repository_creation_role_name
+  description           = var.repository_creation_role_description
   create_policy         = true
   permissions_boundary  = var.permissions_boundary != null ? "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy${var.permissions_boundary}" : null
   postfix               = false

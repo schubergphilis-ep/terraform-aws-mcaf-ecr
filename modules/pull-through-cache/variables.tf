@@ -77,6 +77,12 @@ variable "region" {
   description = "The AWS region where resources will be created; if omitted the default provider region is used"
 }
 
+variable "repository_creation_role_description" {
+  type        = string
+  default     = null
+  description = "Description of the IAM role used by the repository creation template"
+}
+
 variable "repository_creation_role_name" {
   type        = string
   default     = "EcrRepositoryCreationTemplate"
